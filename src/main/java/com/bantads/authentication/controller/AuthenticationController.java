@@ -37,8 +37,8 @@ public class AuthenticationController {
 
     @PostMapping
     public ResponseEntity<AuthenticationModel> createAuthentication(@RequestBody AuthenticationModel authModel) {
-        AuthenticationModel addedauthModel = this.authenticationRepository.save(authModel);
-        return ResponseEntity.ok(addedauthModel);
+        AuthenticationModel addedAuthModel = this.authenticationRepository.save(authModel);
+        return ResponseEntity.ok(addedAuthModel);
     }
 
     @PutMapping("/{id}")
