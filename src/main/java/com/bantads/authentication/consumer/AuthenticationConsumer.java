@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @Data
 public class AuthenticationConsumer {
 
-
     @Autowired private AuthenticationRepository authenticationRepository;
 
     @RabbitListener(queues = "auth.create")
