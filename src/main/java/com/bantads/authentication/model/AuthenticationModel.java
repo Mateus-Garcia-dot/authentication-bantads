@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class AuthenticationModel {
     @Id
     private String uuid = java.util.UUID.randomUUID().toString();
-    private Long account;
+    private String account;
     private String login;
     private String password;
     private Integer type;
