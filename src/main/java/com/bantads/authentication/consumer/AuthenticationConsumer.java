@@ -22,7 +22,7 @@ public class AuthenticationConsumer {
 
     @RabbitListener(queues = "auth.update")
     public void updateAuthentication(AuthenticationModel authModel) {
-        AuthenticationModel auth = this.authenticationRepository.findById(authModel.getId()).orElse(null);
+        AuthenticationModel auth = this.authenticationRepository.findById(authModel.getUuid()).orElse(null);
         if(auth == null) {
             return;
         }
@@ -36,7 +36,7 @@ public class AuthenticationConsumer {
 
     @RabbitListener(queues = "auth.delete")
     public void deleteAuthentication(AuthenticationModel authenticationModel) {
-        this.authenticationRepository.deleteById(authenticationModel.getId());
+        this.authenticationRepository.deleteById(authenticationModel.getUuid());
     }
 
 }

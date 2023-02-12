@@ -25,12 +25,11 @@ public class AuthenticationController {
     @GetMapping
     public ResponseEntity<List<AuthenticationModel>> getAllAuthentications() {
         List<AuthenticationModel> authModelList = this.authenticationRepository.findAll();
-        authModelList.sort((a, b) -> a.getId().compareTo(b.getId()));
         return ResponseEntity.ok(authModelList);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AuthenticationModel> getAuthenticationById(@PathVariable ObjectId id) {
+    public ResponseEntity<AuthenticationModel> getAuthenticationById(@PathVariable String id) {
         AuthenticationModel authModel = this.authenticationRepository.findById(id).orElseThrow();
         return ResponseEntity.ok(authModel);
     }
@@ -42,7 +41,7 @@ public class AuthenticationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AuthenticationModel> updateAuthentication(@PathVariable ObjectId id, @RequestBody AuthenticationModel authModel) {
+    public ResponseEntity<AuthenticationModel> updateAuthentication(@PathVariable String id, @RequestBody AuthenticationModel authModel) {
         AuthenticationModel auth = this.authenticationRepository.findById(id).orElseThrow();
         auth.setAccount(authModel.getAccount());
         auth.setLogin(authModel.getLogin());
@@ -54,7 +53,7 @@ public class AuthenticationController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteAuthentication(@PathVariable ObjectId id) {
+    public ResponseEntity<String> deleteAuthentication(@PathVariable String id) {
         AuthenticationModel authModel = this.authenticationRepository.findById(id).orElseThrow();
         this.authenticationRepository.deleteById(id);
         return ResponseEntity.ok("Deleted");
