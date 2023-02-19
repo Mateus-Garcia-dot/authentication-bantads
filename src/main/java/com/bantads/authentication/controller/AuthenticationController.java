@@ -34,6 +34,12 @@ public class AuthenticationController {
         return ResponseEntity.ok(authModel);
     }
 
+    @GetMapping("/account/{account}")
+    public ResponseEntity<AuthenticationModel> getAuthenticationByAccount(@PathVariable String account) {
+        AuthenticationModel authModel = this.authenticationRepository.findByAccount(account);
+        return ResponseEntity.ok(authModel);
+    }
+
     @PostMapping
     public ResponseEntity<AuthenticationModel> createAuthentication(@RequestBody AuthenticationModel authModel) {
         AuthenticationModel addedAuthModel = this.authenticationRepository.save(authModel);
