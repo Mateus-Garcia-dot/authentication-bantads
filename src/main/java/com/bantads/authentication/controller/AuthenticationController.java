@@ -19,8 +19,8 @@ public class AuthenticationController {
     private AuthenticationRepository authenticationRepository;
 
     @GetMapping("/pending")
-    public ResponseEntity<AuthenticationModel> getPendingAuthentication() {
-        AuthenticationModel authModel = this.authenticationRepository.findByIsPendingAndIsApproved();
+    public ResponseEntity<List<AuthenticationModel>> getPendingAuthentication() {
+        List<AuthenticationModel> authModel = this.authenticationRepository.findByIsPendingAndIsApproved();
         return ResponseEntity.ok(authModel);
     }
 

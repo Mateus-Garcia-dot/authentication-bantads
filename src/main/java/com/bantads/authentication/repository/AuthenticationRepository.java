@@ -5,6 +5,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
+import java.util.List;
+
 
 public interface AuthenticationRepository extends MongoRepository<AuthenticationModel, String> {
     @Query("{ 'customer' : ?0 }")
@@ -14,5 +16,5 @@ public interface AuthenticationRepository extends MongoRepository<Authentication
     AuthenticationModel findByLoginAndPassword(String login, String password);
 
     @Query("{'isPending' : true}")
-    AuthenticationModel findByIsPendingAndIsApproved();
+    List<AuthenticationModel> findByIsPendingAndIsApproved();
 }
