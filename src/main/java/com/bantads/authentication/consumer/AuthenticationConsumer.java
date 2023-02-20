@@ -40,7 +40,7 @@ public class AuthenticationConsumer {
 
     @RabbitListener(queues = "auth.patch")
     public void patchAuthentication(AuthenticationModel authModel) {
-        AuthenticationModel auth = this.authenticationRepository.findById(authModel.getUuid()).orElse(null);
+        AuthenticationModel auth = this.authenticationRepository.findByCustomer(authModel.getCustomer());
         if(auth == null) {
             return;
         }
