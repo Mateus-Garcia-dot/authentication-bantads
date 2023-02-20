@@ -13,6 +13,6 @@ public interface AuthenticationRepository extends MongoRepository<Authentication
     @Query("{ 'login' : ?0, 'password' : ?1 }")
     AuthenticationModel findByLoginAndPassword(String login, String password);
 
-    @Query("{'isPending' : true, 'isApproved' : false}")
+    @Query("{'isPending' : true}")
     AuthenticationModel findByIsPendingAndIsApproved();
 }
