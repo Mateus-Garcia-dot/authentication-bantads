@@ -8,6 +8,6 @@ import org.springframework.data.mongodb.repository.Query;
 
 public interface AuthenticationRepository extends MongoRepository<AuthenticationModel, String> {
     // search by account
-    @Query("{ 'account' : ?0 }")
-    AuthenticationModel findByAccount(String account);
+    @Query("{ 'customer' : ?0 }")
+    AuthenticationModel findByCustomer(String account);
 }

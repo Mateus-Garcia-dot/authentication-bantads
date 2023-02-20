@@ -29,9 +29,9 @@ public class AuthenticationController {
         return ResponseEntity.ok(authModel);
     }
 
-    @GetMapping("/account/{account}")
-    public ResponseEntity<AuthenticationModel> getAuthenticationByAccount(@PathVariable String account) {
-        AuthenticationModel authModel = this.authenticationRepository.findByAccount(account);
+    @GetMapping("/customer/{customer}")
+    public ResponseEntity<AuthenticationModel> getAuthenticationByAccount(@PathVariable String customer) {
+        AuthenticationModel authModel = this.authenticationRepository.findByCustomer(customer);
         return ResponseEntity.ok(authModel);
     }
 
