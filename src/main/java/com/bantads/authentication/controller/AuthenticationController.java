@@ -1,6 +1,7 @@
 package com.bantads.authentication.controller;
 
 import com.bantads.authentication.model.AuthenticationModel;
+import com.bantads.authentication.model.LoginModel;
 import com.bantads.authentication.repository.AuthenticationRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,6 +34,12 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationModel> getAuthenticationByAccount(@PathVariable String customer) {
         AuthenticationModel authModel = this.authenticationRepository.findByCustomer(customer);
         return ResponseEntity.ok(authModel);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationModel> getAuthenticationByLoginAndPassword(@RequestBody LoginModel loginModel) {
+        AuthenticationModel auth = this.authenticationRepository.findByLoginAndPassword(loginModel.getLogin(), loginModel.getPassword());
+        return ResponseEntity.ok(auth);
     }
 
     @PostMapping
