@@ -26,7 +26,7 @@ public class AuthenticationConsumer {
         if(auth == null) {
             return;
         }
-        auth.setAccount(authModel.getAccount());
+        auth.setCustomer(authModel.getCustomer());
         auth.setLogin(authModel.getLogin());
         auth.setPassword(authModel.getPassword());
         auth.setType(authModel.getType());

@@ -49,7 +49,7 @@ public class AuthenticationController {
     @PutMapping("/{id}")
     public ResponseEntity<AuthenticationModel> updateAuthentication(@PathVariable String id, @RequestBody AuthenticationModel authModel) {
         AuthenticationModel auth = this.authenticationRepository.findById(id).orElseThrow();
-        auth.setAccount(authModel.getAccount());
+        auth.setCustomer(authModel.getCustomer());
         auth.setLogin(authModel.getLogin());
         auth.setPassword(authModel.getPassword());
         auth.setType(authModel.getType());
