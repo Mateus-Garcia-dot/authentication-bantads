@@ -4,23 +4,18 @@ import com.bantads.authentication.model.AuthenticationModel;
 import com.bantads.authentication.repository.AuthenticationRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 @RestController
 @RequestMapping("/authentication")
 public class AuthenticationController {
 
-    @Autowired private AuthenticationRepository authenticationRepository;
-
+    private AuthenticationRepository authenticationRepository;
 
     @GetMapping
     public ResponseEntity<List<AuthenticationModel>> getAllAuthentications() {
