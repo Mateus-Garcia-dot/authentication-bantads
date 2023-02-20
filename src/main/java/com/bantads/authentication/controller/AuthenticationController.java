@@ -67,9 +67,12 @@ public class AuthenticationController {
         return ResponseEntity.ok("Deleted");
     }
 
-    @PatchMapping
-public ResponseEntity<AuthenticationModel> patchAuthentication(@RequestBody AuthenticationModel authModel) {
-        AuthenticationModel auth = this.authenticationRepository.findById(authModel.getUuid()).orElseThrow();
+    @PatchMapping("/{id}")
+    public ResponseEntity<AuthenticationModel> patchAuthentication(@PathVariable String id, @RequestBody AuthenticationModel authModel) {
+        AuthenticationModel auth = this.authenticationRepository.findByCustomer(id);
+        if(auth == null) {
+            return ResponseEntity.notFound().build();
+        }
         if(authModel.getCustomer() != null) {
             auth.setCustomer(authModel.getCustomer());
         }
