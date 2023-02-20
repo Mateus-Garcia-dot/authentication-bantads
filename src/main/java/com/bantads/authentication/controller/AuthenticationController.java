@@ -59,4 +59,29 @@ public class AuthenticationController {
         this.authenticationRepository.deleteById(id);
         return ResponseEntity.ok("Deleted");
     }
+
+    @PatchMapping
+public ResponseEntity<AuthenticationModel> patchAuthentication(@RequestBody AuthenticationModel authModel) {
+        AuthenticationModel auth = this.authenticationRepository.findById(authModel.getUuid()).orElseThrow();
+        if(authModel.getCustomer() != null) {
+            auth.setCustomer(authModel.getCustomer());
+        }
+        if(authModel.getLogin() != null) {
+            auth.setLogin(authModel.getLogin());
+        }
+        if(authModel.getPassword() != null) {
+            auth.setPassword(authModel.getPassword());
+        }
+        if(authModel.getType() != null) {
+            auth.setType(authModel.getType());
+        }
+        if(authModel.getIsApproved() != null) {
+            auth.setIsApproved(authModel.getIsApproved());
+        }
+        if(authModel.getIsPending() != null) {
+            auth.setIsPending(authModel.getIsPending());
+        }
+        return ResponseEntity.ok(this.authenticationRepository.save(auth));
+    }
+
 }

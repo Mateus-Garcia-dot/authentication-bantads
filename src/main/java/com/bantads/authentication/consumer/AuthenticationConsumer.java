@@ -38,4 +38,31 @@ public class AuthenticationConsumer {
         this.authenticationRepository.deleteById(authenticationModel.getUuid());
     }
 
+    @RabbitListener(queues = "auth.patch")
+    public void patchAuthentication(AuthenticationModel authModel) {
+        AuthenticationModel auth = this.authenticationRepository.findById(authModel.getUuid()).orElse(null);
+        if(auth == null) {
+            return;
+        }
+        if(authModel.getCustomer() != null) {
+            auth.setCustomer(authModel.getCustomer());
+        }
+        if(authModel.getLogin() != null) {
+            auth.setLogin(authModel.getLogin());
+        }
+        if(authModel.getPassword() != null) {
+            auth.setPassword(authModel.getPassword());
+        }
+        if(authModel.getType() != null) {
+            auth.setType(authModel.getType());
+        }
+        if(authModel.getIsApproved() != null) {
+            auth.setIsApproved(authModel.getIsApproved());
+        }
+        if(authModel.getIsPending() != null) {
+            auth.setIsPending(authModel.getIsPending());
+        }
+        this.authenticationRepository.save(auth);
+    }
+
 }
