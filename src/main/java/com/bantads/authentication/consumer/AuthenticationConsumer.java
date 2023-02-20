@@ -2,11 +2,13 @@ package com.bantads.authentication.consumer;
 
 import com.bantads.authentication.model.AuthenticationModel;
 import com.bantads.authentication.repository.AuthenticationRepository;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 @Data
 public class AuthenticationConsumer {
 
