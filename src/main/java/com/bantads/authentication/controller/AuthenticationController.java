@@ -18,6 +18,12 @@ public class AuthenticationController {
 
     private AuthenticationRepository authenticationRepository;
 
+    @GetMapping("/pending")
+    public ResponseEntity<AuthenticationModel> getPendingAuthentication() {
+        AuthenticationModel authModel = this.authenticationRepository.findByIsPendingAndIsApproved();
+        return ResponseEntity.ok(authModel);
+    }
+
     @GetMapping
     public ResponseEntity<List<AuthenticationModel>> getAllAuthentications() {
         List<AuthenticationModel> authModelList = this.authenticationRepository.findAll();

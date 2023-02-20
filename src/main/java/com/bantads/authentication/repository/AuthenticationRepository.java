@@ -7,9 +7,12 @@ import org.springframework.data.mongodb.repository.Query;
 
 
 public interface AuthenticationRepository extends MongoRepository<AuthenticationModel, String> {
-    // search by account
     @Query("{ 'customer' : ?0 }")
     AuthenticationModel findByCustomer(String account);
+
     @Query("{ 'login' : ?0, 'password' : ?1 }")
     AuthenticationModel findByLoginAndPassword(String login, String password);
+
+    @Query("{'isPending' : true, 'isApproved' : false}")
+    AuthenticationModel findByIsPendingAndIsApproved();
 }
