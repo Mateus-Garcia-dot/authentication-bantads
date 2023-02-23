@@ -11,9 +11,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMqConfig {
 
+   public final static String exchangeName = "orchestrator-saga";
+
     @Bean
     DirectExchange exchange() {
-        return new DirectExchange("orchestrator-saga");
+        return new DirectExchange(exchangeName);
     }
 
     @Bean
