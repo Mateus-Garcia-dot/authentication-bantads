@@ -1,10 +1,12 @@
 package com.bantads.authentication.consumer;
 
+import com.bantads.authentication.config.ManagerConfiguration;
 import com.bantads.authentication.model.AuthenticationModel;
 import com.bantads.authentication.repository.AuthenticationRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 public class AuthenticationConsumer {
 
     private AuthenticationRepository authenticationRepository;
+    private RabbitTemplate rabbitTemplate;
 
     @RabbitListener(queues = "auth.create")
     public void createAuthentication(AuthenticationModel authModel) {
@@ -62,6 +65,7 @@ public class AuthenticationConsumer {
         if(authModel.getIsPending() != null) {
             auth.setIsPending(authModel.getIsPending());
         }
+        rabbitTemplate.convertAndSend(ManagerConfiguration.sortRequestQueueName, 1);
         this.authenticationRepository.save(auth);
     }
 

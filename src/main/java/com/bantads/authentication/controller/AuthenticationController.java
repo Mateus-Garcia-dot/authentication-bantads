@@ -1,10 +1,12 @@
 package com.bantads.authentication.controller;
 
+import com.bantads.authentication.config.ManagerConfiguration;
 import com.bantads.authentication.model.AuthenticationModel;
 import com.bantads.authentication.model.LoginModel;
 import com.bantads.authentication.repository.AuthenticationRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,7 @@ import java.util.List;
 public class AuthenticationController {
 
     private AuthenticationRepository authenticationRepository;
+    private RabbitTemplate rabbitTemplate;
 
     @GetMapping("/pending")
     public ResponseEntity<List<AuthenticationModel>> getPendingAuthentication() {
@@ -97,6 +100,7 @@ public class AuthenticationController {
         if(authModel.getIsPending() != null) {
             auth.setIsPending(authModel.getIsPending());
         }
+        rabbitTemplate.convertAndSend(ManagerConfiguration.sortRequestQueueName, 1);
         return ResponseEntity.ok(this.authenticationRepository.save(auth));
     }
 
